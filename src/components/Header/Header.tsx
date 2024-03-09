@@ -1,5 +1,6 @@
 import {FC} from "react";
 import Logo from "../Logo/Logo.tsx";
+import Button from "../UI/Button/Button.tsx";
 
 import style from "./Header.module.css"
 const Header:FC = () => {
@@ -8,6 +9,7 @@ const Header:FC = () => {
             <div className="container">
                 <div className={style.wrapper}>
                     <Logo children="Admin Panel" />
+                    <Button>LogOut</Button>
                 </div>
             </div>
         </div>
