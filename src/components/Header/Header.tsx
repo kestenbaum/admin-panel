@@ -1,4 +1,5 @@
 import {FC} from "react";
+import Logo from "../Logo/Logo.tsx";
 
 import style from "./Header.module.css"
 const Header:FC = () => {
@@ -6,7 +7,7 @@ const Header:FC = () => {
         <div className={style.header}>
             <div className="container">
                 <div className={style.wrapper}>
-                        Admin Panel
+                    <Logo children="Admin Panel" />
                 </div>
             </div>
         </div>
