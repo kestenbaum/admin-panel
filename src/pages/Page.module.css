@@ -1,8 +1,11 @@
 .page {
+    position: relative;
     padding-top: 70px;
 }
 
 .wrapper {
     display: flex;
+    align-items: center;
+    justify-content: center;
 }
 

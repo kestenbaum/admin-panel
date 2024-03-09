@@ -1,53 +1,28 @@
 import {FC} from "react";
+import ListItem from "../ListItem/ListItem.tsx";
+import {useQuery} from "react-query";
+import {worksServices} from "../../services/items.services.ts";
 
 import styles from "./List.module.css";
-import ListItem from "../ListItem/ListItem.tsx";
-const List:FC = () => {
 
-    const data:any[] = [
-            {
-                "id": 1,
-                "title": "Airbag Layout",
-                "img": "/assets/airbag.png",
-                "link": "https://kestenbaum.github.io/Airbag-Layout/"
-            },
-            {
-                "id": 2,
-                "title": "IT Services",
-                "img": "/assets/it.png",
-                "link": "https://kestenbaum.github.io/IT-Blog/"
-            },
-            {
-                "id": 3,
-                "title": "Work on yourself",
-                "img": "/assets/work.png",
-                "link": "https://kestenbaum.github.io/IT-Work/"
-            },
-            {
-                "id": 4,
-                "title": "Technology",
-                "img": "/assets/technology.png",
-                "link": "https://kestenbaum.github.io/Technology/"
-            },
-            {
-                "id": 5,
-                "title": "Aosta",
-                "img": "/assets/aosta.png",
-                "link": "https://kestenbaum.github.io/Aosta/"
-            }
-        ]
+const List: FC = () => {
+    const {data, isLoading} = useQuery({
+        queryKey: ["items"],
+        queryFn: () => worksServices.getWorks()
+    })
 
     return (
         <div className={styles.wrapper}>
-            {data.map(element => {
-                return <ListItem
-                    key={element.id}
-                    id={element.id}
-                    link={element.link}
-                    title={element.title}
-                    img={element.img}
-                />
-            })}
+            {!isLoading
+                ? data
+                    ?.map(item =>  <ListItem
+                        key={item._id}
+                        _id={item._id}
+                        title={item.title}
+                        img={item.img}
+                    />)
+                :
+                <>loader</>}
         </div>
     );
 };
