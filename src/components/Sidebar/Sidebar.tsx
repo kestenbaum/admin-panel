@@ -1,6 +1,7 @@
 import {FC, useState} from "react";
 
 import styles from "./Sidebar.module.css"
+import Form from "../Form/Form.tsx";
 const Sidebar:FC = () => {
     const [isActive, setIsActive] = useState<boolean>(false)
     const toggleClick = () => setIsActive(!isActive)
@@ -11,7 +12,7 @@ const Sidebar:FC = () => {
                 onClick={toggleClick}
                 className={styles.arrow}
             ></div>
-            Hallo
+            <Form/>
         </div>
     );
 };
