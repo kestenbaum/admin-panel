@@ -1,10 +1,8 @@
 import  {FC} from 'react';
 import logo from "../../assets/logo.png"
+import {ILogo} from "../../interface";
 
 import style from "./Logo.module.css"
-interface ILogo {
-    children: string
-}
 const Logo:FC<ILogo> = ({children}) => {
     return (
         <div className={style.wrapper}>
