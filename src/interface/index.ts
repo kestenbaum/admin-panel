@@ -1,5 +1,4 @@
 import React, {InputHTMLAttributes} from "react";
-
 export interface ILogo {
     children: string
 }

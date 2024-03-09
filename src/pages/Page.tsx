@@ -6,7 +6,7 @@ import Sidebar from "../components/Sidebar/Sidebar.tsx";
 import Login from "../components/Login/Login.tsx";
 
 const Page: FC = () => {
-    const [iSLogin, setIsLogin] = useState<boolean>(false)
+    const [iSLogin] = useState<boolean>(false)
 
     return (
         <section className={style.page}>
