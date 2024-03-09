@@ -1,0 +1,18 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: #161b22;
+    border: 2px solid rgba(80, 80, 80, .5);
+    border-radius: 15px;
+    min-width: 250px;
+    padding: 25px;
+    width: 300px;
+}
+
+.label {
+    font-family: Oswald, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: #fff;
+}
