@@ -1,0 +1,36 @@
+.wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid #fff;
+    padding: 5px 10px;
+}
+
+.block {
+    display: flex;
+    gap: 10px;
+}
+
+.btns {
+    display: flex;
+    gap: 10px;
+}
+
+.title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: red;
+    font-weight: 900;
+}
+
+.text {
+    color: white;
+    font-family: Oswald, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+}
+.img {
+    max-width: 16px;
+    max-height: 16px;
+}
