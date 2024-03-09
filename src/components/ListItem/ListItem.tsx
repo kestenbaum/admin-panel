@@ -1,21 +1,17 @@
 import {FC} from "react";
+import ButtonFunc from "../UI/ButtonFunc/ButtonFunc.tsx";
+import {Icons} from "../../interface";
 
 import styles from "./ListItem.module.css";
-import ButtonFunc from "../UI/ButtonFunc/ButtonFunc.tsx";
-interface IListItem {
-    "id"?: 5,
-    "title": number,
-    "img": string,
-    "link": string
-}
 
-const ListItem:FC<IListItem> = ({img, link, title, id}) => {
+const ListItem:FC<Icons> = (props) => {
+    const {img, category, title, _id} = props
     return (
         <div className={styles.wrapper}>
             <div className={styles.block}>
                 <span className={styles.title}>
                     Id:
-                    <span className={styles.text}>{id}</span>
+                    <span className={styles.text}>{_id}</span>
                 </span>
                 <span className={styles.title}>
                     Title:
@@ -23,9 +19,9 @@ const ListItem:FC<IListItem> = ({img, link, title, id}) => {
                 </span>
                 <span className={styles.title}>
                     Link:
-                    <span className={styles.text}>{link}</span>
+                    <span className={styles.text}>{category}</span>
                 </span>
-                <img src={img} alt="image item"/>
+                <img src={img} width={25} height={25} alt="image item"/>
             </div>
             <div className={styles.btns}>
                 <ButtonFunc children={"Delete"} color={"red"}/>
