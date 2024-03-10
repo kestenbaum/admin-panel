@@ -1,13 +1,32 @@
-import {FC} from "react";
+import {FC, useState} from "react";
+import {useMutation} from "react-query";
 import ButtonFunc from "../UI/ButtonFunc/ButtonFunc.tsx";
+import Popup from "../UI/Popup/Popup.tsx";
+import {Card} from "../Card/Card.tsx";
 import {Icons} from "../../interface";
+import {worksServices} from "../../services/items.services.ts";
+import {queryClient} from "../../Provider.tsx";
 
 import styles from "./ListItem.module.css";
 
-const ListItem:FC<Icons> = (props) => {
-    const {img, category, title, _id} = props
+const ListItem: FC<Icons> = (
+    {title, _id, category, img, link}
+) => {
+    const [isShow, setIsShow] = useState<boolean>(false)
+    const mutation = useMutation((_id: string) => worksServices.deleteWork(_id), {
+        onSuccess: () => {
+            queryClient.invalidateQueries("items")
+        }
+    })
+    const deletePost = (_id: string) => mutation.mutate(_id)
+
     return (
         <div className={styles.wrapper}>
+            <Popup
+                showModal={isShow}
+                setShowModal={setIsShow}
+                children={<Card category={category} title={title} img={img} link={link}/>
+                }/>
             <div className={styles.block}>
                 <span className={styles.title}>
                     Id:
@@ -17,15 +36,18 @@ const ListItem:FC<Icons> = (props) => {
                     Title:
                     <span className={styles.text}>{title}</span>
                 </span>
-                <span className={styles.title}>
-                    Link:
-                    <span className={styles.text}>{category}</span>
-                </span>
-                <img src={img} width={25} height={25} alt="image item"/>
             </div>
             <div className={styles.btns}>
-                <ButtonFunc children={"Delete"} color={"red"}/>
-                <ButtonFunc children={"Update"} color={"green"}/>
+                <ButtonFunc
+                    children={"Delete"}
+                    color={"red"}
+                    onClick={() => deletePost(String(_id))}
+                />
+                <ButtonFunc
+                    children={"Update"}
+                    color={"green"}
+                    onClick={() => setIsShow(!isShow)}
+                />
             </div>
         </div>
     );
