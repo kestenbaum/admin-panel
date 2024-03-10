@@ -1,8 +1,8 @@
 import {FC} from "react";
 import ListItem from "../ListItem/ListItem.tsx";
-import {useQuery} from "react-query";
 import {worksServices} from "../../services/items.services.ts";
 
+import {useQuery} from "react-query";
 import styles from "./List.module.css";
 
 const List: FC = () => {
@@ -20,6 +20,7 @@ const List: FC = () => {
                         _id={item._id}
                         title={item.title}
                         img={item.img}
+                        link={item.link}
                     />)
                 :
                 <>loader</>}
