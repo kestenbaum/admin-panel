@@ -13,13 +13,27 @@ export interface IButton extends
 export interface IInput  extends InputHTMLAttributes<HTMLInputElement>{}
 
 export interface Icons {
-    _id: string,
+    _id?: string,
     title: string,
     img: string,
     category?: string
+    link?: string
 }
 
 export interface IGetData {
     status: number
     data: Icons[]
+}
+
+export interface IPopup {
+    children: React.ReactNode,
+    showModal: boolean,
+    setShowModal: any
+}
+
+export interface IFormInput {
+    title: string
+    link: string,
+    img: string,
+    category: string
 }
