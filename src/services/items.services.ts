@@ -1,5 +1,5 @@
 import axios from "axios";
-import { IGetData} from "../interface";
+import {IFormInput, IGetData} from "../interface";
 
 class WorksServices {
     private URL = "https://kestenbaum-page-me-api.onrender.com/api/works"
@@ -13,7 +13,7 @@ class WorksServices {
         }
     }
 
-    postWork = async (formData:any) => {
+    postWork = async (formData:IFormInput) => {
         const {data} = await axios.post(this.URL, formData)
         return data
     }
