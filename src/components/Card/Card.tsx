@@ -1,20 +1,25 @@
 import {FC} from 'react';
-import img from "../../assets/logo.png"
-
-
-import styles from './Card.module.css';
 import Input from "../UI/Input/Input.tsx";
 import Button from "../UI/Button/Button.tsx";
 import InputFunc from "../UI/InputFunc/InputFunc.tsx";
+import {Icons} from "../../interface";
 
-export const Card:FC = () => {
+import styles from './Card.module.css';
+
+export const Card:FC<Icons> = ({img, title, link}) => {
     return (
-        <div className={styles.card}>
-            <InputFunc type={"text"} placeholder={"Aosta"}/>
-            <InputFunc type={"text"} placeholder={"Link"}/>
+        <form className={styles.card}>
+            <InputFunc
+                type={"text"}
+                placeholder={title}
+            />
+            <InputFunc
+                type={"text"}
+                placeholder={link}
+            />
             <img src={img} className={styles.img} alt={'image'}/>
             <Input type={"file"}/>
             <Button>Save</Button>
-        </div>
+        </form>
     );
 };
