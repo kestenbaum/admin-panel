@@ -9,7 +9,7 @@ import {worksServices} from "../../services/items.services.ts";
 import styles from "./Form.module.css";
 
 const Form:FC = () => {
-    const [imageBase64, setImageBase34] = useState<string>("")
+    const [imageBase64, setImageBase34] = useState<string | null | ArrayBuffer>("")
     const {register, handleSubmit} = useForm<IFormInput>()
     const onSubmit:SubmitHandler<IFormInput> = (data) => {
         mutation.mutate({...data, img: imageBase64});
@@ -25,7 +25,7 @@ const Form:FC = () => {
         reader.readAsDataURL(file);
     }
 
-    const mutation = useMutation((formData) => worksServices.postWork(formData), {
+    const mutation = useMutation((FormData:IFormInput) => worksServices.postWork(FormData), {
         onSuccess: () => {
             queryClient.invalidateQueries("items");
         }
