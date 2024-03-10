@@ -34,6 +34,7 @@ export interface IPopup {
 export interface IFormInput {
     title: string
     link: string,
-    img: string,
+    img: string | null | ArrayBuffer,
     category: string
 }
+
