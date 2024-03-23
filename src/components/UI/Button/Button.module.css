@@ -17,6 +17,6 @@
 .btn:hover{
     background: #161b28;
     border-color: transparent;
-    transform: scale(1.1);
+    transform: scale(1.03);
     transition: .3s;
 }
