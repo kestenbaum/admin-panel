@@ -1,22 +1,20 @@
 import {FC, useState} from 'react';
 
-import style from "./Page.module.css"
 import List from "../components/List/List.tsx";
-import Sidebar from "../components/Sidebar/Sidebar.tsx";
 import Login from "../components/Login/Login.tsx";
 
+import styles from "./Page.module.css"
 const Page: FC = () => {
     const [iSLogin] = useState<boolean>(false)
 
     return (
-        <section className={style.page}>
+        <section className={styles.page}>
             <div className="container">
-                <div className={style.wrapper}>
+                <div className={styles.wrapper}>
                     {iSLogin ?
                         <Login/>
                         :
                         <>
-                            <Sidebar/>
                             <List/>
                         </>
                     }
