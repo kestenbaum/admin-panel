@@ -1,21 +1,23 @@
-import {FC, useState} from "react";
+import {ChangeEvent, FC, useState} from "react";
 import {SubmitHandler, useForm} from "react-hook-form";
 import {useMutation} from "react-query";
-
 import {queryClient} from "../../Provider.tsx";
-import {IFormInput} from "../../interface";
-import {worksServices} from "../../services/items.services.ts";
 
+import Button from "../UI/Button/Button.tsx";
+
+import {IForm, FormProps} from "../../interface";
+
+import {worksServices} from "../../services/items.services.ts";
 import styles from "./Form.module.css";
 
-const Form:FC = () => {
+const Form:FC<FormProps> = ({setShowModal, showModal}) => {
     const [imageBase64, setImageBase34] = useState<string | null | ArrayBuffer>("")
-    const {register, handleSubmit} = useForm<IFormInput>()
-    const onSubmit:SubmitHandler<IFormInput> = (data) => {
-        mutation.mutate({...data, img: imageBase64});
-    };
-    const handlerFileChange = (event:any) => {
-        const file = event.target.files[0];
+    const {register, handleSubmit} = useForm<IForm>()
+    const onSubmit:SubmitHandler<IForm> = (data) => mutation.mutate({...data, img: imageBase64});
+
+    const handlerFileChange = (event: ChangeEvent<HTMLInputElement>) => {
+        const file = event.target.files?.length ? event.target.files[0] : null;
+        if (!file) return
         const reader = new FileReader();
 
         reader.onloadend = () => {
@@ -25,7 +27,7 @@ const Form:FC = () => {
         reader.readAsDataURL(file);
     }
 
-    const mutation = useMutation((FormData:IFormInput) => worksServices.postWork(FormData), {
+    const mutation = useMutation((FormData:IForm) => worksServices.postWork(FormData), {
         onSuccess: () => {
             queryClient.invalidateQueries("items");
         }
@@ -39,8 +41,7 @@ const Form:FC = () => {
             <input
                 placeholder={"Title"}
                 type={"text"}
-                {...register('title')}
-            />
+                {...register('title')}/>
             <input
                 placeholder={"Link"}
                 type={"text"}
@@ -52,12 +53,14 @@ const Form:FC = () => {
                 {...register("category")}
             />
             <input
-                type={"file"}
+                name={"file"}
                 onChange={handlerFileChange}
+                type={"file"}
             />
-            <button
+            <Button
                 children={"Create"}
                 type={"submit"}
+                onClick={() =>  showModal && setShowModal(false)}
             />
         </form>
     );
