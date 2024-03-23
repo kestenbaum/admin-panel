@@ -8,7 +8,7 @@ const Header:FC = () => {
         <div className={style.header}>
             <div className="container">
                 <div className={style.wrapper}>
-                    <Logo children="Admin Panel" />
+                    <Logo />
                     <Button>LogOut</Button>
                 </div>
             </div>
