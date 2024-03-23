@@ -1,10 +1,9 @@
 import  {FC} from "react";
-import {IPopup} from "../../../interface";
+import {PopupProps} from "../../../interface";
 
 import styles from "./Popup.module.css";
 
-
-const Popup:FC<IPopup> = ({children, showModal, setShowModal}) => {
+const Popup:FC<PopupProps> = ({children, showModal, setShowModal}) => {
 
     return (
         <section
