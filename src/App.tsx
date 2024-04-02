@@ -1,14 +1,11 @@
-import Header from "./components/Header/Header.tsx";
-import Page from "./pages/Page.tsx";
-
+import Login from './components/Login/Login'
 
 function App() {
-    return (
-        <>
-            <Header/>
-            <Page/>
-        </>
-    )
+  return (
+    <>
+      <Login/>
+    </>
+  )
 }
 
 export default App

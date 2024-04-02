@@ -1,69 +1,55 @@
-import {ChangeEvent, FC, useState} from "react";
-import {SubmitHandler, useForm} from "react-hook-form";
-import {useMutation} from "react-query";
-import {queryClient} from "../../Provider.tsx";
+import { ChangeEvent, FC, useState } from 'react'
+import { SubmitHandler, useForm } from 'react-hook-form'
+import { FormProps, IForm } from '../../interface'
 
-import Button from "../UI/Button/Button.tsx";
+import styles from './Form.module.css'
+import { useMutation } from 'react-query'
+import { worksServices } from '../../services/items.services'
+import { queryClient } from '../../Provider'
+import Button from '../UI/Button/Button'
 
-import {IForm, FormProps} from "../../interface";
+const Form: FC<FormProps> = ({ setShowModal, showModal }) => {
+  const [imageBase64, setImageBase34] = useState<string | null | ArrayBuffer>(
+    ''
+  )
+  const { register, handleSubmit } = useForm<IForm>()
+  const onSubmit: SubmitHandler<IForm> = data =>
+    mutation.mutate({ ...data, img: imageBase64 })
 
-import {worksServices} from "../../services/items.services.ts";
-import styles from "./Form.module.css";
+  const handlerFileChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.length ? event.target.files[0] : null
+    if (!file) return
+    const reader = new FileReader()
 
-const Form:FC<FormProps> = ({setShowModal, showModal}) => {
-    const [imageBase64, setImageBase34] = useState<string | null | ArrayBuffer>("")
-    const {register, handleSubmit} = useForm<IForm>()
-    const onSubmit:SubmitHandler<IForm> = (data) => mutation.mutate({...data, img: imageBase64});
-
-    const handlerFileChange = (event: ChangeEvent<HTMLInputElement>) => {
-        const file = event.target.files?.length ? event.target.files[0] : null;
-        if (!file) return
-        const reader = new FileReader();
-
-        reader.onloadend = () => {
-            setImageBase34(reader.result);
-        };
-
-        reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      setImageBase34(reader.result)
     }
 
-    const mutation = useMutation((FormData:IForm) => worksServices.postWork(FormData), {
-        onSuccess: () => {
-            queryClient.invalidateQueries("items");
-        }
-    });
+    reader.readAsDataURL(file)
+  }
 
-    return (
-        <form
-            className={styles.form}
-            onSubmit={handleSubmit(onSubmit)}
-        >
-            <input
-                placeholder={"Title"}
-                type={"text"}
-                {...register('title')}/>
-            <input
-                placeholder={"Link"}
-                type={"text"}
-                {...register("link")}
-            />
-            <input
-                placeholder={"Category"}
-                type={"text"}
-                {...register("category")}
-            />
-            <input
-                name={"file"}
-                onChange={handlerFileChange}
-                type={"file"}
-            />
-            <Button
-                children={"Create"}
-                type={"submit"}
-                onClick={() =>  showModal && setShowModal(false)}
-            />
-        </form>
-    );
-};
+  const mutation = useMutation(
+    (FormData: IForm) => worksServices.postWork(FormData),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries('items')
+      },
+    }
+  )
 
-export default Form;
+  return (
+    <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+      <input placeholder={'Title'} type={'text'} {...register('title')} />
+      <input placeholder={'Link'} type={'text'} {...register('link')} />
+      <input placeholder={'Category'} type={'text'} {...register('category')} />
+      <input name={'file'} onChange={handlerFileChange} type={'file'} />
+      <Button
+        children={'Create'}
+        type={'submit'}
+        onClick={() => showModal && setShowModal(false)}
+      />
+    </form>
+  )
+}
+
+export default Form

@@ -1,16 +1,16 @@
 .wrapper {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .logo {
-    height: 16px;
-    width: 16px;
+  height: 16px;
+  width: 16px;
 }
 
 .logo__text {
-    font-family: Oswald, sans-serif;
-    font-size: 16px;
-    font-weight: 400;
+  font-family: Oswald, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
 }

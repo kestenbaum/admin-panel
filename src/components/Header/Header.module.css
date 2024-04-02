@@ -1,16 +1,16 @@
 .header {
-    position: fixed;
-    width: 100%;
-    top: 0;
-    left: 0;
-    background-color: #0d1117;
-    z-index: 999;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background-color: #0d1117;
+  z-index: 999;
 }
 
 .wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 60px;
-    color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 60px;
+  color: #fff;
 }

@@ -1,17 +1,37 @@
-import {FC} from "react";
-import Button from "../UI/Button/Button.tsx";
+import { FC, useState } from 'react'
 
-import styles from "./Login.module.css"
-const Login:FC = () => {
-    return (
-        <form className={styles.form}>
-            <label className={styles.label} htmlFor="name">Username:</label>
-            <input type={"text"} id={"name"} name={"name"}/>
-            <label className={styles.label} htmlFor="pass">Password:</label>
-            <input type={"password"} id={"pass"} name={"pass"}/>
-            <Button children={"Login"}/>
-        </form>
-    );
-};
 
-export default Login;
+import styles from './Login.module.css'
+import { useForm } from 'react-hook-form'
+import { api } from '../../api/instance'
+
+const Login: FC = () => {
+  const { register, handleSubmit } = useForm();
+  const [data, setData] = useState<any>()
+
+  const postLogin = async () =>
+     api("/login", {
+       method: "POST",
+       data,
+       withCredentials: true
+     })
+
+
+  return (
+    <form
+      className={styles.form}
+      onSubmit={handleSubmit((data) => setData(data))}
+    >
+      <input {...register("login")} type={'text'} placeholder={"login"}/>
+      <input {...register("password")} type={'password'} placeholder={"password"} />
+      <button
+        type={"submit"}
+        onClick={() => postLogin()}
+      >
+        Login
+      </button>
+    </form>
+  )
+}
+
+export default Login
