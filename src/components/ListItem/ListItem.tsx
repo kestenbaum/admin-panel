@@ -1,14 +1,15 @@
-import { FC, useState } from 'react'
+import React, { FC, useState } from 'react'
 import { useMutation } from 'react-query'
-import { worksServices } from '../../services/items.services.ts'
-import { queryClient } from '../../Provider.tsx'
 
-import Popup from '../UI/Popup/Popup.tsx'
-import Button from '../UI/Button/Button.tsx'
 import { IForm } from '../../interface'
 
-import { Card } from '../Card/Card.tsx'
+
 import styles from './ListItem.module.css'
+import { queryClient } from '../../Provider'
+import { worksServices } from '../../services/items.services'
+import { Card } from '../Card/Card'
+import Popup from '../UI/Popup/Popup'
+import Button from '../UI/Button/Button'
 
 const ListItem: FC<IForm> = ({ title, _id, img, category, link }) => {
   const [isShow, setIsShow] = useState<boolean>(false)
